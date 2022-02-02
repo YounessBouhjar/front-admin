@@ -1,0 +1,29 @@
+
+<mat-card class="hh">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="checkLogin()">
+              
+      <img src="../../../assets/Counter staff.png" alt="">
+      <h1>Back Office System</h1>To access your account, please identify yourself.
+        <div>
+        <mat-error class="incorrect" *ngIf="loginInvalid"> Email et/ou mot de passe incorrect.</mat-error>
+
+        <mat-form-field >
+          <mat-label color="green">Email</mat-label>
+          <input matInput color="green" placeholder="Email" formControlName="email"  required/>
+          <mat-icon matSuffix>supervised_user_circle</mat-icon>
+          <mat-error>Veuillez entrer votre email.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field >
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" formControlName="password" required/>
+          <mat-icon matSuffix >visibility_off</mat-icon>         
+          <mat-error>Veuillez enter votre mot de passe.</mat-error>
+        </mat-form-field>
+        
+      </div>
+      <button class="login">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card>
