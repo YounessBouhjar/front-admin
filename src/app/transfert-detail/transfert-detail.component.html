@@ -24,10 +24,10 @@
         </mat-grid-list>
         <mat-grid-list cols="2" rowHeight="5:1">
           <mat-grid-tile>
-            <mat-label><strong>ID Agent :</strong> {{Transfert.idAgent}} </mat-label>
+            <mat-label><strong> Agent :</strong> {{idAgent}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Montant à servir :</strong> {{Transfert.montant}} </mat-label>
+            <mat-label><strong>Montant à servir :</strong> {{Transfert.montant}} DH</mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-label><strong>Client :</strong> {{Client}} </mat-label>
@@ -36,7 +36,7 @@
             <mat-label><strong>Date d’émission :</strong> {{Transfert.dateTransfert | date:'medium'}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Bénéficiaire :</strong> {{Beneficiaire}} </mat-label>
+            <mat-label><strong>Bénéficiaire :</strong> {{Transfert.nomBenef}} {{Transfert.prenomBenef}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-label><strong>Motif : </strong> </mat-label>

@@ -60,22 +60,15 @@ stat:any;
         }
         else{
         this.Transfert = data;
+        if(this.Transfert.idAgent==1){this.idAgent="Back Office"}
         console.log("transfert : " +JSON.stringify(this.Transfert));
         console.log(this.Transfert.idClient);
-        console.log(this.Transfert.idAgent);
+        console.log(this.idAgent);
         console.log(this.Transfert.idBeneficiaire);
         this.edited=true;
-        this.idAgent=this.Transfert.idAgent;
         this.clientService.findClient(this.Transfert.idClient).subscribe(
           (data) => {
             this.Client = data.prenom +" "+ data.nom ;
-            console.log(data)
-          },
-          (error) => console.log(error)
-        );
-        this.benefService.findBeneficiaire(this.Transfert.idBeneficiaire).subscribe(
-          (data) => {
-            this.Beneficiaire = data.prenom +" "+ data.nom ;
             console.log(data)
           },
           (error) => console.log(error)
