@@ -51,6 +51,10 @@ import { TransfertDetailComponent } from './transfert-detail/transfert-detail.co
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddTransfertComponent } from './add-transfert/add-transfert.component';
 import { BlocageComponent } from './blocage/blocage.component';
+import { BlocageDetailComponent } from './blocage-detail/blocage-detail.component';
+import { DeblocageComponent } from './deblocage/deblocage.component';
+import { DeblocageDetailComponent } from './deblocage-detail/deblocage-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +68,9 @@ import { BlocageComponent } from './blocage/blocage.component';
     TransfertDetailComponent,
     AddTransfertComponent,
     BlocageComponent,
+    BlocageDetailComponent,
+    DeblocageComponent,
+    DeblocageDetailComponent,
     
   ],
   imports: [
@@ -71,13 +78,10 @@ import { BlocageComponent } from './blocage/blocage.component';
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatDividerModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,

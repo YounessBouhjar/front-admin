@@ -8,27 +8,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BeneficiaireService } from '../service/beneficiaire.service';
 
 @Component({
-  selector: 'app-transfert-detail',
-  templateUrl: './transfert-detail.component.html',
-  styleUrls: ['./transfert-detail.component.css']
+  selector: 'app-deblocage-detail',
+  templateUrl: './deblocage-detail.component.html',
+  styleUrls: ['./deblocage-detail.component.css']
 })
-export class TransfertDetailComponent implements OnInit {
-  rest = new FormGroup({
-    
-    refTrans: new FormControl(''),
-    motiff: new FormControl(''),
+export class DeblocageDetailComponent implements OnInit {
 
-  });
- date=new Date()
-  get refTrans() {
-    return this.rest.get('refTrans');
-  }
-  
-  
-
-  get motiff() {
-    return this.rest.get('motiff');
-  }
+  codeTransfert:any;
   Transfert: any;
   Transfertt: any;
   idAgent:any;
@@ -38,7 +24,8 @@ export class TransfertDetailComponent implements OnInit {
   Client:any;
 stat:any;
    edited:any
-  constructor(     private router: Router,
+  constructor(         private router: ActivatedRoute,
+    
     public dialog: MatDialog,
     private route: Router,
     private transfertService: TransfertService,
@@ -47,16 +34,13 @@ stat:any;
     ) { }
 
   ngOnInit(): void {
-    this.edited=false;
-    
-    
-  }
-  search(){
-    this.edited=false;
-    this.transfertService.findTransfertByCodeTransfert(this.refTrans.value).subscribe(
+    this.codeTransfert = this.router.snapshot.params['codeTransfert'];
+    console.log(this.codeTransfert)
+    this.transfertService.findTransfertByCodeTransfert(this.codeTransfert).subscribe(
       (data) => {
         if(data==null){
           window.alert("La référence de transfert saisie est inexistante")
+          this.route.navigate(['/overview/deblocage']);
         }
         else{
         this.Transfert = data;
@@ -82,8 +66,9 @@ stat:any;
       
     );
   }
+  
 
-restituer(){
+debloquer(){
   this.transfertService.findTransfertByCodeTransfert(this.Transfert.codeTransfert).subscribe(
     (data) => {
       this.Transfert = data;
@@ -93,32 +78,24 @@ restituer(){
 
     }
   );
-  console.log(this.motiff.value)
-  console.log("motif :" +this.Transfert.status)
-  if(this.Transfert.status==='débloqué à servir' ||this.Transfert.status==='à servir'){
-    if(this.motiff.value==='')window.alert("Veuillez entrer un motif de restitution");
+  if(this.Transfert.status!='bloqué'){
+  window.alert("Vous ne pouvez débloquer que les transferts bloqué")
+  this.route.navigate(['/overview/transferts']);
+
+  }
     else{
-      this.stat="restitué"
-      this.transfertService.update(this.Transfert.codeTransfert,this.motiff.value,this.stat).subscribe(
+      this.transfertService.update(this.Transfert.codeTransfert,"","débloqué à servir").subscribe(
         (data) => {
         console.log(data)
-        this.router.navigate(['/overview/transferts']);
+        this.route.navigate(['/overview/transferts']);
 
       },
       (error) => console.log(error)
     );
     }
   }
- else if(this.Transfert.status==='servi'){
-  window.alert("Impossible de restituer le transfert car il est déjà payé");
- }
- else if(this.Transfert.status==='bloqué'){
-  window.alert("Impossible de restituer le transfert car il est bloqué");
- }
- else {
-  window.alert("Impossible de restituer le transfert vérifiez son status");
- }
-}
+ 
 
 
 }
+

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginservice: AuthentificationService
+    private loginservice: AuthentificationService,
   ) {}
 
   ngOnInit() {
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/overview/agents']);
           sessionStorage.setItem('password',btoa(this.password.value))
           console.log("data login : " +JSON.stringify(data));
+
         },
         (error) => {
           this.loginInvalid = true;

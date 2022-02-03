@@ -24,22 +24,22 @@
         </mat-grid-list>
         <mat-grid-list cols="2" rowHeight="5:1">
           <mat-grid-tile>
-            <mat-label><strong> Agent :</strong> {{idAgent}} </mat-label>
+            <mat-label class="w-100"style="margin-left:80px"><strong> Agent :</strong> {{idAgent}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Montant à servir :</strong> {{Transfert.montant}} DH</mat-label>
+            <mat-label class="w-100"><strong>Montant à servir :</strong> {{Transfert.montant}} DH</mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Client :</strong> {{Client}} </mat-label>
+            <mat-label class="w-100"style="margin-left:80px"><strong>Client :</strong> {{Client}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Date d’émission :</strong> {{Transfert.dateTransfert | date:'medium'}} </mat-label>
+            <mat-label class="w-100"><strong>Date d’émission :</strong> {{Transfert.dateTransfert | date:'medium'}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Bénéficiaire :</strong> {{Transfert.nomBenef}} {{Transfert.prenomBenef}} </mat-label>
+            <mat-label class="w-100"style="margin-left:80px"><strong>Bénéficiaire :</strong> {{Transfert.nomBenef}} {{Transfert.prenomBenef}} </mat-label>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-label><strong>Motif : </strong> </mat-label>
+            <mat-label class="w-100"><strong>Motif : </strong> </mat-label>
             <select style=" margin-left:20px;width:125px" class="form-control" formControlName="motiff"
               placeholder="Motif de restitution">
               <option value="Demande">Demande</option>

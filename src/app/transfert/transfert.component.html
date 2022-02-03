@@ -105,10 +105,13 @@
 
 
       <ng-container matColumnDef="motifTransfert">
-        <th mat-header-cell *matHeaderCellDef>Motif de ransfert</th>
+        <th mat-header-cell *matHeaderCellDef>Motif de Transfert</th>
         <td mat-cell *matCellDef="let element">{{ element.motifTransfert }}</td>
       </ng-container>
-
+      <ng-container matColumnDef="motif">
+        <th mat-header-cell *matHeaderCellDef>Motif</th>
+        <td mat-cell *matCellDef="let element">{{ element.motif }}</td>
+      </ng-container>
 
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

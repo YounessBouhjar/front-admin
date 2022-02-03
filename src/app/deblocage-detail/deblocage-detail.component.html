@@ -1,0 +1,58 @@
+<mat-card class="example-card" style="height: 91vh;">
+
+    <form >
+
+  
+      <div *ngIf="edited" style="border:solid 1px;height:500px;width:700px;margin:auto;margin-top:60px" >
+        <mat-card-title style="padding-top: 80px;">Detail du transfert n° {{Transfert.codeTransfert}}</mat-card-title>
+  
+        <div class="container content">
+          <mat-grid-list cols="2" rowHeight="12:1">
+            <mat-grid-tile>
+  
+            </mat-grid-tile>
+          </mat-grid-list>
+          <mat-grid-list cols="2" rowHeight="5:1">
+            <mat-grid-tile>
+              <mat-label  class="w-100"style="margin-left:80px"><strong> Agent :</strong> {{idAgent}} </mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-label class="w-100"><strong>Montant à servir :</strong> {{Transfert.montant}} DH</mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-label class="w-100"style="margin-left:80px"><strong>Client :</strong> {{Client}} </mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-label class="w-100"><strong>Date d’émission :</strong> {{Transfert.dateTransfert | date:'medium'}} </mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-label class="w-100"style="margin-left:80px"><strong>Bénéficiaire :</strong> {{Transfert.nomBenef}} {{Transfert.prenomBenef}} </mat-label>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-label class="w-100"><strong>Motif de blocage :</strong> {{Transfert.motif}} </mat-label>
+            </mat-grid-tile>
+  
+  
+  
+          </mat-grid-list>
+  
+      <div fxFlex fxLayoutAlign="start center">
+        <div>
+          <div class="form-group" style="margin-top:30px;">
+            <div style="display: flex; justify-content:space-around;">
+  
+  
+  
+              <button style="border:solid 1px;" mat-button class="blueButton" (click)="debloquer()">
+                Debloquer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+  
+    </div>
+    </div>
+  </form>
+  </mat-card>
