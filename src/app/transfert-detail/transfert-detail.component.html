@@ -38,14 +38,15 @@
           <mat-grid-tile>
             <mat-label class="w-100"style="margin-left:80px"><strong>Bénéficiaire :</strong> {{Transfert.nomBenef}} {{Transfert.prenomBenef}} </mat-label>
           </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-label class="w-100"><strong>Motif : </strong> </mat-label>
-            <select style=" margin-left:20px;width:125px" class="form-control" formControlName="motiff"
+          <mat-grid-tile style="display:flex;justify-content:flex-start" >
+            <mat-label class="w-100"><strong>Motif : </strong> 
+            <select style="margin-left:20px; width:100px"   formControlName="motiff"
               placeholder="Motif de restitution">
               <option value="Demande">Demande</option>
               <option value="Soupeçon">Soupeçon</option>
               <option value="Blacklisted">Blacklisted</option>
             </select>
+          </mat-label>
           </mat-grid-tile>
 
 

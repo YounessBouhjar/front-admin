@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agent } from '../Model/agent';
+import { Compte } from '../Model/compte';
 import { AgentService } from '../service/agent.service';
+import { CompteService } from '../service/compte.service';
 
 @Component({
   selector: 'app-add-agent',
@@ -10,7 +12,7 @@ import { AgentService } from '../service/agent.service';
   styleUrls: ['./add-agent.component.css']
 })
 export class AddAgentComponent implements OnInit {
-
+compte :Compte;
   agent: Agent;
   id: string;
   addAgent = new FormGroup({
@@ -40,6 +42,8 @@ export class AddAgentComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private agentService: AgentService,
+    private compteService: CompteService,
+
   ) {}
 
   ngOnInit(): void {
@@ -51,9 +55,32 @@ export class AddAgentComponent implements OnInit {
     this.agent = this.addAgent.value;
     this.agentService
       .save(this.agent)
-      .subscribe((result) => this.gotoAgentList());
+      .subscribe((result) =>{
+      console.log(result)
+      this.onSubmit2(result.nom)}
+      );
   }
 
+  onSubmit2(nom:string) {
+    // console.log(this.compte)
+    this.compte=new Compte()
+    this.compte.solde=10000
+    this.compte.nomClient=nom
+    this.compte.typeCompte="Compte Agent"
+    console.log(this.compte)
+    this.compteService
+      .addCompte(this.compte)
+      .subscribe((result) => {
+        // this.gotoTransfertList()
+      console.log("transfert : " +JSON.stringify(result));
+     console.log("alltransferts")
+  },
+  (error) => {
+    console.log(error)
+
+  })
+    
+      }
   gotoAgentList() {
     this.router.navigate(['/overview/agents']);
   }

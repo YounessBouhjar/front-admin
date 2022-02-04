@@ -6,6 +6,7 @@ import { ClientService } from '../service/client.service';
 import { TransfertService } from '../service/transfert.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeneficiaireService } from '../service/beneficiaire.service';
+import { CompteService } from '../service/compte.service';
 
 @Component({
   selector: 'app-transfert-detail',
@@ -20,6 +21,11 @@ export class TransfertDetailComponent implements OnInit {
 
   });
  date=new Date()
+  compte: any;
+  montant: any;
+  transfert: any;
+  addtransfert: any;
+  solde: number;
   get refTrans() {
     return this.rest.get('refTrans');
   }
@@ -42,7 +48,7 @@ stat:any;
     public dialog: MatDialog,
     private route: Router,
     private transfertService: TransfertService,
-    private benefService: BeneficiaireService,
+    private compteService: CompteService,
     private clientService: ClientService,
     ) { }
 
@@ -102,7 +108,7 @@ restituer(){
       this.transfertService.update(this.Transfert.codeTransfert,this.motiff.value,this.stat).subscribe(
         (data) => {
         console.log(data)
-        this.router.navigate(['/overview/transferts']);
+        this.update()
 
       },
       (error) => console.log(error)
@@ -119,6 +125,29 @@ restituer(){
   window.alert("Impossible de restituer le transfert vérifiez son status");
  }
 }
+
+
+update() {
+  this.compteService.findCompte().subscribe(
+    (data) => {
+      console.log(data)
+      this.compte=data
+      this.solde=this.compte.solde+this.Transfert.montant
+
+      this.compteService.update(this.compte.nomClient,this.solde).subscribe((result) =>
+       this.router.navigate(['/overview/transferts']));
+
+},
+(error) => {
+  console.log(error)
+
+})
+      }
+      
+
+
+
+
 
 
 }

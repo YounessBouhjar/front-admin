@@ -28,14 +28,15 @@
             <mat-grid-tile>
               <mat-label class="w-100"style="margin-left:80px"><strong>Bénéficiaire :</strong> {{Transfert.nomBenef}} {{Transfert.prenomBenef}} </mat-label>
             </mat-grid-tile>
-            <mat-grid-tile>
-              <mat-label class="w-100"><strong>Motif : </strong> </mat-label>
-              <select style=" margin-left:20px;width:220px" class="form-control" formControlName="motiff"
+            <mat-grid-tile style="display:flex;justify-content:flex-start">
+              <mat-label class="w-100"><strong>Motif : </strong> 
+              <select style=" width:250px"  formControlName="motiff"
                 placeholder="Motif de bloquage">
                 <option value="Bloqué après expiration du délai">Bloqué après expiration du délai</option>
                 <option value="Bloqué client donneur d’ordre soupçons">Bloqué client donneur d’ordre soupçons</option>
                 <option value="Bloqué client bénéficiaire soupçons">Bloqué client bénéficiaire soupçons</option>
               </select>
+            </mat-label>
             </mat-grid-tile>
   
   

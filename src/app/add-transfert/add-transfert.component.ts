@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../Model/client';
 import { Transfert } from '../Model/transfert';
 import { ClientService } from '../service/client.service';
+import { CompteService } from '../service/compte.service';
 import { TransfertService } from '../service/transfert.service';
 
 @Component({
@@ -12,12 +13,13 @@ import { TransfertService } from '../service/transfert.service';
   styleUrls: ['./add-transfert.component.css']
 })
 export class AddTransfertComponent implements OnInit {
-
-  
+  solde:any;
+  compte:any;  
   transfert: Transfert;
   id: string;
   idClient:any;
   client:any
+  mont:any
   addtransfert = new FormGroup({
     pi: new FormControl('', Validators.required),
     numGsm: new FormControl('', Validators.required),
@@ -66,7 +68,7 @@ export class AddTransfertComponent implements OnInit {
 
 
   constructor(
-    private route: ActivatedRoute,
+    private compteService:CompteService,
     private router: Router,
     private transfertService: TransfertService,
     private clientService:ClientService
@@ -94,25 +96,47 @@ onchange(){
   });
 }
   onSubmit() {
-    this.transfert = this.addtransfert.value;
+    this.compteService.findCompte().subscribe(
+      (data) => {
+        console.log(data)
+        this.compte=data
+        if (data.solde-this.montant.value<0){
+          window.alert("Solde insuffisable.\nVotre solde est: "+data.solde+" DH")
+          this.router.navigate(['/overview/transferts']);
+
+        }
+        else{
+          this.transfert = this.addtransfert.value;
     this.transfert.idAgent=1
       this.transfert.idClient=this.idClient
     this.transfertService
       .save(this.transfert)
       .subscribe((result) => {
-        // this.gotoTransfertList()
-      console.log("transfert : " +JSON.stringify(result));
-     console.log("alltransferts")
+      this.updateSolde()
+
 
   },
   (error) => {
     console.log(error)
 
   })
-    
-      };
+        }
+        
   
+  },   (error) => {
+      console.log(error)
+  
+    });
+    
+    
+      }
+  
+updateSolde(){
+  this.solde=this.compte.solde-this.montant.value
 
+  this.compteService.update(this.compte.nomClient,this.solde).subscribe((result) =>
+   this.router.navigate(['/overview/transferts']));
+}
 
 
 

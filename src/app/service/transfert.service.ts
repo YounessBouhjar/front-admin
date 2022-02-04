@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { pipeFromArray } from 'rxjs/internal/util/pipe';
 import { Transfert } from '../Model/transfert';
 
 @Injectable({

@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,12 +74,12 @@ import { DeblocageDetailComponent } from './deblocage-detail/deblocage-detail.co
     
   ],
   imports: [
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatDividerModule,
     MatCheckboxModule,

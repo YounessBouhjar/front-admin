@@ -5,7 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Compte } from '../Model/compte';
 import { Transfert } from '../Model/transfert';
+import { CompteService } from '../service/compte.service';
 import { TransfertService } from '../service/transfert.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class TransfertComponent implements OnInit {
   Transferts: any;
   id: string;
   id2: number;
-
+  isReadOnly: boolean;
+  compte:Compte;
   dataSource = new MatTableDataSource<Transfert>(this.Transferts);
   TransfertCrit = new FormGroup({
     CodeAgent: new FormControl(''),
@@ -76,11 +79,14 @@ export class TransfertComponent implements OnInit {
     private router: ActivatedRoute,
     public dialog: MatDialog,
     private route: Router,
-    private transfertService: TransfertService
+    private transfertService: TransfertService,
+    private compteService: CompteService
   ) {}
 
   ngOnInit(): void {
+    this.isReadOnly=true
     this.HandleChange();
+    this.solde();
   }
 
 
@@ -120,4 +126,17 @@ export class TransfertComponent implements OnInit {
   goToForm() {
     this.route.navigate(['/overview/addTransfert']);
   }
+  solde(){
+    this.compteService.findCompte().subscribe(
+      (data) => {
+        console.log(data)
+        this.compte=data    
+  
+},   (error) => {
+    console.log(error)
+
+  });
+  
+  
+}
 }
