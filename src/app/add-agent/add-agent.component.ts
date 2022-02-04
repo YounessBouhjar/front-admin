@@ -74,6 +74,8 @@ compte :Compte;
         // this.gotoTransfertList()
       console.log("transfert : " +JSON.stringify(result));
      console.log("alltransferts")
+     this.gotoAgentList() 
+
   },
   (error) => {
     console.log(error)

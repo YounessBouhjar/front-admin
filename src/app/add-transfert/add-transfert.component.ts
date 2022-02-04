@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../Model/client';
+import { Notification } from '../Model/notification';
 import { Transfert } from '../Model/transfert';
 import { ClientService } from '../service/client.service';
 import { CompteService } from '../service/compte.service';
+import { NotificationService } from '../service/notification.service';
 import { TransfertService } from '../service/transfert.service';
 
 @Component({
@@ -20,6 +22,10 @@ export class AddTransfertComponent implements OnInit {
   idClient:any;
   client:any
   mont:any
+  notif:Notification
+  codeTransfert:string
+  benef:string
+a:number
   addtransfert = new FormGroup({
     pi: new FormControl('', Validators.required),
     numGsm: new FormControl('', Validators.required),
@@ -71,7 +77,8 @@ export class AddTransfertComponent implements OnInit {
     private compteService:CompteService,
     private router: Router,
     private transfertService: TransfertService,
-    private clientService:ClientService
+    private clientService:ClientService,
+    private notificationService:NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -100,7 +107,11 @@ onchange(){
       (data) => {
         console.log(data)
         this.compte=data
-        if (data.solde-this.montant.value<0){
+
+        if (this.montant.value>2000){
+          window.alert("Vous ne pouvez pas dépasser 2000 MAD dans un seul transfert")
+        }
+        else if (data.solde-this.montant.value<0){
           window.alert("Solde insuffisable.\nVotre solde est: "+data.solde+" DH")
           this.router.navigate(['/overview/transferts']);
 
@@ -109,10 +120,15 @@ onchange(){
           this.transfert = this.addtransfert.value;
     this.transfert.idAgent=1
       this.transfert.idClient=this.idClient
+
     this.transfertService
       .save(this.transfert)
       .subscribe((result) => {
+        this.codeTransfert=result.codeTransfert
+        this.a=result.montant
+        this.benef=result.nomBenef+" " +result.prenomBenef
       this.updateSolde()
+      this.sendSms();
 
 
   },
@@ -137,8 +153,21 @@ updateSolde(){
   this.compteService.update(this.compte.nomClient,this.solde).subscribe((result) =>
    this.router.navigate(['/overview/transferts']));
 }
+sendSms(){
+  this.notif= new Notification()
 
+      this.notif.message="Vous avez effectué un versement de montant : "+this.a+" à "+this.benef+".\n Votre code de transfert est :"+this.codeTransfert
+      this.notif.phoneNumber=this.transfert.numGsm
+ 
+this.notificationService.send(this.notif).subscribe((result) => {
+  this.router.navigate(['/overview/transferts']);
 
+},
+(error) => {
+  console.log(error)
+
+})
+}
 
   gotoTransfertList() {
     this.router.navigate(['/overview/transferts']);

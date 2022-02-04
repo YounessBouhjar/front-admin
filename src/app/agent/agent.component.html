@@ -1,13 +1,11 @@
+
+
 <div class="bottomBorder">
     <div class="container">
-      <mat-grid-list cols="2" rowHeight="16:1">
+      <mat-grid-list cols="3" rowHeight="55">
         <mat-grid-tile class="fullheight">
-          <div fxFlex fxLayoutAlign="start center">
-            <button mat-button class="blueButton" (click)="goToForm()">
-              AJOUTER
-            </button>
-          </div>
-        </mat-grid-tile>
+  
+        </mat-grid-tile>        
         <mat-grid-tile class="fullheight">
           <mat-form-field>
             <mat-label>Filtre</mat-label>
@@ -17,10 +15,29 @@
             </span>
           </mat-form-field>
         </mat-grid-tile>
+        <mat-grid-tile class="fullheight">
+  
+        </mat-grid-tile>
       </mat-grid-list>
     </div>
   </div>
-  
+  <div class="bottomBorder">
+    <div class="container">
+      <mat-grid-list cols="2" rowHeight="16:1">
+        
+        <mat-grid-tile class="fullheight">
+          
+        </mat-grid-tile>
+        <mat-grid-tile class="fullheight">
+          <div fxFlex fxLayoutAlign="start center">
+            <button mat-button class="blueButton" (click)="goToForm()">
+              AJOUTER
+            </button>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
   <div class="container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="id">
