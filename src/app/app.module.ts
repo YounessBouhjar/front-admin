@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -63,7 +62,6 @@ import { UpdateAdminComponent } from './update-admin/update-admin.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    LogoutComponent,
     HomeComponent,
     AgentComponent,
     AddAgentComponent,
@@ -126,6 +124,7 @@ import { UpdateAdminComponent } from './update-admin/update-admin.component';
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AddAdminComponent]
 })
 export class AppModule { }

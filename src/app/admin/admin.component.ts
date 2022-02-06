@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddAdminComponent } from '../add-admin/add-admin.component';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { Admin } from '../Model/admin';
 import { AdminService } from '../service/admin.service';
@@ -31,7 +32,7 @@ export class AdminComponent implements OnInit {
     private router: ActivatedRoute,
     public dialog: MatDialog,
     private route: Router,
-    private adminService: AdminService
+    private adminService: AdminService,
   ) {}
 
   deleteAdmin(id: number) {
@@ -63,13 +64,17 @@ export class AdminComponent implements OnInit {
     );
   }
   goToForm() {
-    this.route.navigate(['/overview/addAdmin']);
+    const dialogConfig =new MatDialogConfig();
+    dialogConfig.autoFocus=true
+    dialogConfig.width="60%"
+    dialogConfig.height="45%"
+    this.dialog.open(AddAdminComponent,dialogConfig)
+
   }
   goToAdmins(id2: number) {
     this.route.navigate(['/overview/updateAdmin/' + id2]);
   }
-
-
+  
   deleteRecord(selectedItem: any): void {
 
 

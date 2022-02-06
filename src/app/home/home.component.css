@@ -1,29 +1,27 @@
 .sidenav-container {
-    height: 100%;
-  }
-  
-  .sidenav {
-    width: 200px;
-  }
-  
-  .sidenav .mat-toolbar {
-    background: inherit;
-  }
-  
-  .mat-toolbar.mat-primary {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: #610B84;
+  height: 100%;
+}
 
-  }
- .disconnect{
-  margin-left: 90%;
-  margin-top:10px;
-  background-color: #610B84;
-  cursor: pointer;
+.sidenav {
+  width: 200px;
+  color: white;
+  background-color:#FECF47 ;
+}
 
-  
-  
- }
-  
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+}
+.disconnect{
+margin-left: 90%;
+margin-top:10px;
+cursor: pointer;
+}
+
+

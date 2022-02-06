@@ -13,8 +13,8 @@ export class AgentService {
   }
   
   public findAllAgents(): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -25,8 +25,8 @@ export class AgentService {
   }
 
   public save(agent: Agent) :Observable<Agent>{
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -34,25 +34,25 @@ export class AgentService {
   }
 
   public delete(id: number): Observable<void> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
     return this.http.delete<void>(`${this.agentUrl}agent/delete/${id}`,{headers});
   }
-  public update(id:number,agent: Agent): Observable<Agent> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+  public update(agent: Agent): Observable<Agent> {
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
-    return this.http.put<Agent>(`${this.agentUrl}agent/update/${id}`, agent);
+    return this.http.put<Agent>(`${this.agentUrl}agent/update`, agent,{headers});
   }
 
   public findAgent(id: number): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });

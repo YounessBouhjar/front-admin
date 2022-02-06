@@ -1,29 +1,11 @@
+<div class="containerr">
+  <mat-toolbar>
+    <span>New Agent</span>
+    <span class="fill-remaining-space"></span>
+    <button style="margin-left: 75%;" class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon >clear</mat-icon></button>
+  </mat-toolbar>
 <form [formGroup]="addAgent" (ngSubmit)="onSubmit()">
-    <div class="bottomBorder">
-      <div class="container">
-        <mat-grid-list cols="2" rowHeight="16:1">
-          <mat-grid-tile class="fullheight">
-            <div fxFlex fxLayoutAlign="start center">
-              <button
-                mat-button
-                class="blueButton"
-                type="submit"
-                value="Valider"
-                [disabled]="!addAgent.valid"
-              >
-                Valider
-              </button>
-              <button mat-button class="blueButton" (click)="reset()">
-                Rénitialiser
-              </button>
-              <button mat-button class="blueButton" (click)="gotoAgentList()">
-                Annuler
-              </button>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </div>
+
   
     <div class="container content">
       <mat-grid-list cols="2" rowHeight="6:1">
@@ -63,5 +45,28 @@
         </mat-grid-tile>
       </mat-grid-list>
     </div>
+    <div class="bottomBorder">
+      <div class="container">
+        <mat-grid-list cols="1" rowHeight="16:1">
+          <mat-grid-tile class="fullheight">
+            <div fxFlex fxLayoutAlign="start center">
+              <button
+                mat-button
+                class="blueButton"
+                type="submit"
+                value="Valider"
+                [disabled]="!addAgent.valid"
+              >
+                Valider
+              </button>
+
+              <button mat-button class="blueButton" (click)="onClose()">
+                Annuler
+              </button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
   </form>
-  
+</div>

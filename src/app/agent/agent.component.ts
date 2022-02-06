@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddAgentComponent } from '../add-agent/add-agent.component';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { Agent } from '../Model/agent';
 import { AgentService } from '../service/agent.service';
@@ -66,7 +67,12 @@ export class AgentComponent implements OnInit {
     );
   }
   goToForm() {
-    this.route.navigate(['/overview/addAgent']);
+    const dialogConfig =new MatDialogConfig();
+    dialogConfig.autoFocus=true
+    dialogConfig.width="60%"
+    dialogConfig.height="55%"
+    this.dialog.open(AddAgentComponent,dialogConfig)
+
   }
   goToAgents(id2: number) {
     this.route.navigate(['/overview/updateAgent/' + id2]);

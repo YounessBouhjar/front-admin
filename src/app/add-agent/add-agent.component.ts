@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agent } from '../Model/agent';
 import { Compte } from '../Model/compte';
@@ -43,6 +44,7 @@ compte :Compte;
     private router: Router,
     private agentService: AgentService,
     private compteService: CompteService,
+    public dialogRef:MatDialogRef<AddAgentComponent>
 
   ) {}
 
@@ -74,7 +76,8 @@ compte :Compte;
         // this.gotoTransfertList()
       console.log("transfert : " +JSON.stringify(result));
      console.log("alltransferts")
-     this.gotoAgentList() 
+     this.onClose()
+     window.location.reload()
 
   },
   (error) => {
@@ -87,8 +90,9 @@ compte :Compte;
     this.router.navigate(['/overview/agents']);
   }
 
-  reset() {
-    this.addAgent.reset();
+  onClose(){
+    this.addAgent.reset()
+    this.dialogRef.close()
   }
 
   getErrorMessage() {

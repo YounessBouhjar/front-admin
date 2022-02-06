@@ -13,7 +13,7 @@ export class AuthentificationService {
   authentificate(email, password) {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
-      
+
     });
     return this.httpClient
       .get<Admin>('http://localhost:9191/admin/username/'+email, {headers,})
@@ -22,7 +22,10 @@ export class AuthentificationService {
           sessionStorage.setItem('email', email);
           console.log("userData : " +JSON.stringify(userData))
           console.log("Is logged in " +this.isUserLoggedIn());
-          
+          let authString = 'Basic ' + btoa(email + ':' + password);
+
+          sessionStorage.setItem('basicauth', authString);
+
           return userData;
         })
         

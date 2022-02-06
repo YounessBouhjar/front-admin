@@ -13,8 +13,8 @@ export class TransfertService {
   }
 
   public findAllTransferts(): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -23,16 +23,16 @@ export class TransfertService {
     });
   }
   public save(transfert: Transfert) :Observable<any>{
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
     return this.http.post<Transfert>(this.transfertUrl + 'transfert/add', transfert,{headers});
   }
   public update(codeTransfert: number,motif:string,status:string): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -55,8 +55,8 @@ export class TransfertService {
     codeTransfert: string,
     status: string
   ): Observable<Transfert[]> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -89,8 +89,8 @@ export class TransfertService {
   }
 
   public findTransfertByCodeTransfert(codeTransfert:any): Observable<Transfert[]> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });

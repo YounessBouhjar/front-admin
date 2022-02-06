@@ -13,8 +13,8 @@ export class CompteService {
   }
 
   public addCompte(compte:Compte): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -23,8 +23,8 @@ export class CompteService {
     });
   }
   public findCompte(): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });
@@ -32,8 +32,8 @@ export class CompteService {
   }
 
   public update(nomClient:string,solde: number): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });

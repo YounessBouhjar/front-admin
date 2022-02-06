@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           this.loginInvalid = false;
-          this.router.navigate(['/overview/agents']);
+          this.router.navigate(['/overview/admins']);
           sessionStorage.setItem('password',btoa(this.password.value))
           console.log("data login : " +JSON.stringify(data));
 

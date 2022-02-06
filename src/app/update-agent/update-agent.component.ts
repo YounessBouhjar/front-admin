@@ -85,8 +85,9 @@ export class UpdateAgentComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.agent = this.addAgent.value;
+        this.agent.id=this.id2
         this.agentService
-          .update(this.id2,this.agent)
+          .update(this.agent)
           .subscribe((result) => this.router.navigate(['/overview/agents']));
       }
     }

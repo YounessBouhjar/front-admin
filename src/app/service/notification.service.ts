@@ -12,8 +12,8 @@ export class NotificationService {
     this.notifUrl = 'http://localhost:8080/';
   }
   public send(notification: Notification) :Observable<any>{
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });

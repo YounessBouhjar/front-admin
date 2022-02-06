@@ -1,0 +1,9 @@
+.cont{
+    background-image: url("../assets/background.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}

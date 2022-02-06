@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../Model/client';
 import { Notification } from '../Model/notification';
@@ -76,7 +77,9 @@ export class AddTransfertComponent implements OnInit {
     private router: Router,
     private transfertService: TransfertService,
     private clientService: ClientService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    public dialogRef:MatDialogRef<AddTransfertComponent>
+
   ) {}
 
   ngOnInit(): void {}
@@ -111,8 +114,8 @@ export class AddTransfertComponent implements OnInit {
         } else if (data.solde - this.montant.value < 0) {
           window.alert(
             'Solde insuffisable.\nVotre solde est: ' + data.solde + ' DH'
-          );
-          this.router.navigate(['/overview/transferts']);
+            );
+              this.onClose()
         } else {
           this.transfert = this.addtransfert.value;
           this.transfert.idAgent = 1;
@@ -143,7 +146,8 @@ export class AddTransfertComponent implements OnInit {
 
     this.compteService
       .update(this.compte.nomClient, this.solde)
-      .subscribe((result) => this.router.navigate(['/overview/transferts']));
+      .subscribe((result) =>       this.onClose()
+      );
   }
   sendSms() {
     this.notif = new Notification();
@@ -159,10 +163,13 @@ export class AddTransfertComponent implements OnInit {
 
     this.notificationService.send(this.notif).subscribe(
       (result) => {
-        this.router.navigate(['/overview/transferts']);
-      },
+      this.onClose()
+       window.location.reload()
+},
       (error) => {
         console.log(error);
+        this.onClose    
+       window.location.reload()
       }
     );
   }
@@ -171,9 +178,7 @@ export class AddTransfertComponent implements OnInit {
     this.router.navigate(['/overview/transferts']);
   }
 
-  reset() {
-    this.addtransfert.reset();
-  }
+
 
   getErrorMessage() {
     if (
@@ -186,5 +191,8 @@ export class AddTransfertComponent implements OnInit {
       return 'You must enter a value';
   }
 
-  //this.GsmBenef.hasError('required')||
+  onClose(){
+    this.addtransfert.reset()
+    this.dialogRef.close()
+  }
 }

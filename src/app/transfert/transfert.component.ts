@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddTransfertComponent } from '../add-transfert/add-transfert.component';
 import { Compte } from '../Model/compte';
 import { Transfert } from '../Model/transfert';
 import { CompteService } from '../service/compte.service';
@@ -112,7 +113,12 @@ export class TransfertComponent implements OnInit {
 
   }
   goToForm() {
-    this.route.navigate(['/overview/addTransfert']);
+    const dialogConfig =new MatDialogConfig();
+    dialogConfig.autoFocus=true
+    dialogConfig.width="60%"
+    dialogConfig.height="70%"
+    this.dialog.open(AddTransfertComponent,dialogConfig)
+
   }
   solde(){
     this.compteService.findCompte().subscribe(

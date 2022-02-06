@@ -5,7 +5,7 @@ import { Admin } from '../Model/admin';
 import { Compte } from '../Model/compte';
 import { AdminService } from '../service/admin.service';
 import { CompteService } from '../service/compte.service';
-
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-admin',
   templateUrl: './add-admin.component.html',
@@ -37,6 +37,7 @@ export class AddAdminComponent implements OnInit {
     private router: Router,
     private adminsService: AdminService,
     private compteService: CompteService,
+    public dialogRef:MatDialogRef<AddAdminComponent>
 
   ) {}
 
@@ -68,14 +69,19 @@ export class AddAdminComponent implements OnInit {
         // this.gotoTransfertList()
       console.log("transfert : " +JSON.stringify(result));
      console.log("alltransferts")
-     this.gotoAdminList() 
+     this.onClose()
+     window.location.reload()
 
-  },
+    },
   (error) => {
     console.log(error)
 
   })
-    
+
+      }
+      onClose(){
+        this.addAdmin.reset()
+        this.dialogRef.close()
       }
   gotoAdminList() {
     this.router.navigate(['/overview/admins']);

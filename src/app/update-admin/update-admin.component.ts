@@ -72,8 +72,9 @@ export class UpdateAdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.admin = this.addAdmin.value;
+        this.admin.id = this.id
         this.adminService
-          .update(this.id,this.admin)
+          .update(this.addAdmin.value)
           .subscribe((result) => this.router.navigate(['/overview/admins']));
       }
     }

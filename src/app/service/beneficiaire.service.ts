@@ -13,8 +13,8 @@ export class BeneficiaireService {
     this.benefUrl = 'http://localhost:9191/admin/';
   }
   public findBeneficiaire(id: number): Observable<any> {
-    let email = 'younessbouhjar55@gmail.com';
-    let password = 'admin';
+    let email = sessionStorage.getItem('email');
+    let password = atob(sessionStorage.getItem('password'));
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(email + ':' + password),
     });

@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>
-    {{title}}
-  </h1>
-  
-  <div mat-dialog-content>
-    <p>{{message}}</p>
-  </div>
-  
-  <div mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="onDismiss()">No</button>
-    <button  mat-raised-button color="success" (click)="onConfirm()">Yes</button>
+  {{title}}
+</h1>
 
-  </div>
+<div mat-dialog-content>
+  <p>{{message}}</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button class="nw"  (click)="onDismiss()">No</button>
+  <button  mat-raised-button class="nw" (click)="onConfirm()">Yes</button>
+
+</div>

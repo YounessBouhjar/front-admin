@@ -1,26 +1,26 @@
 mat-card-content, mat-card-title, mat-card-actions {
-    text-align: center;
+  text-align: center;
 }
 
 .mat-grid-tile .mat-figure {
-  justify-content: flex-start !important ;
-  align-items: flex-start !important;
+justify-content: flex-start !important ;
+align-items: flex-start !important;
 }
 mat-card-content{
-    padding-top: 20px;
-    padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 .advanced-color{
-    color: #610B84;
+  color: #FECF47;
 }
 
-  .blueButton {
-    background: #610B84;
-    color: white;
-    margin-left:50px;
-  }
+.blueButton {
+  background: #FECF47;
+  color: black;
+  margin-left:50px;
+}
 
-  .mat-form-field{
-    width:350px !important;
- }
- 
+.mat-form-field{
+  width:350px !important;
+}
+

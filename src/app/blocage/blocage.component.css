@@ -1,28 +1,27 @@
 table {
-    width: 100%;
-  }
-  .mat-form-field {
-    font-size: 14px;
-    width: 80%;
-  }
-  .container {
+  width: 100%;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 80%;
+}
+.container {
 
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-right: 2%;
-    margin-left: 2%;
-  }
-  .blueButton {
-    background: #610B84;
-    color: white;
-  }
-  .importer {
-    color: #610B84;
-  }
-  .borderBottom {
-    border-bottom: 1px solid #dee2e6;
-  }
-  .fullheight {
-    height: 100%;
-  }
-  
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+.blueButton {
+  background: #610B84;
+  color: white;
+}
+.importer {
+  color: #610B84;
+}
+.borderBottom {
+  border-bottom: 1px solid #dee2e6;
+}
+.fullheight {
+  height: 100%;
+}
