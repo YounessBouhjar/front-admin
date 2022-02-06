@@ -12,20 +12,20 @@ import { TransfertService } from '../service/transfert.service';
 @Component({
   selector: 'app-add-transfert',
   templateUrl: './add-transfert.component.html',
-  styleUrls: ['./add-transfert.component.css']
+  styleUrls: ['./add-transfert.component.css'],
 })
 export class AddTransfertComponent implements OnInit {
-  solde:any;
-  compte:any;  
+  solde: any;
+  compte: any;
   transfert: Transfert;
   id: string;
-  idClient:any;
-  client:any
-  mont:any
-  notif:Notification
-  codeTransfert:string
-  benef:string
-a:number
+  idClient: any;
+  client: any;
+  mont: any;
+  notif: Notification;
+  codeTransfert: string;
+  benef: string;
+  a: number;
   addtransfert = new FormGroup({
     pi: new FormControl('', Validators.required),
     numGsm: new FormControl('', Validators.required),
@@ -36,8 +36,6 @@ a:number
     nomBenef: new FormControl('', Validators.required),
     prenomBenef: new FormControl('', Validators.required),
     motifTransfert: new FormControl('', Validators.required),
-
-    
   });
 
   get pi() {
@@ -68,106 +66,106 @@ a:number
 
   get prenomBenef() {
     return this.addtransfert.get('prenomBenef');
-  }  get nomBenef() {
+  }
+  get nomBenef() {
     return this.addtransfert.get('nomBenef');
   }
 
-
   constructor(
-    private compteService:CompteService,
+    private compteService: CompteService,
     private router: Router,
     private transfertService: TransfertService,
-    private clientService:ClientService,
-    private notificationService:NotificationService
+    private clientService: ClientService,
+    private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+  onchange() {
+    this.clientService.findClientCin(this.pi.value).subscribe(
+      (data) => {
+        console.log(data);
+
+        this.client = data;
+        this.idClient = data.clientId;
+
+        this.addtransfert.get('numGsm').setValue(data.numGSM);
+        this.addtransfert.get('nom').setValue(data.nom);
+        this.addtransfert.get('prenom').setValue(data.prenom);
+        console.log(this.motifTransfert.value);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-onchange(){
-  this.clientService.findClientCin(this.pi.value).subscribe(
-    (data) => {
-      console.log(data)
-
-      this.client= data;
-    this.idClient=data.clientId
-
-
-    this.addtransfert.get("numGsm").setValue(data.numGSM);
-    this.addtransfert.get("nom").setValue(data.nom);
-    this.addtransfert.get("prenom").setValue(data.prenom);
-      console.log(this.motifTransfert.value)
-},   (error) => {
-    console.log(error)
-
-  });
-}
   onSubmit() {
     this.compteService.findCompte().subscribe(
       (data) => {
-        console.log(data)
-        this.compte=data
+        console.log(data);
+        this.compte = data;
 
-        if (this.montant.value>2000){
-          window.alert("Vous ne pouvez pas dépasser 2000 MAD dans un seul transfert")
-        }
-        else if (data.solde-this.montant.value<0){
-          window.alert("Solde insuffisable.\nVotre solde est: "+data.solde+" DH")
+        if (this.montant.value > 2000) {
+          window.alert(
+            'Vous ne pouvez pas dépasser 2000 MAD dans un seul transfert'
+          );
+        } else if (data.solde - this.montant.value < 0) {
+          window.alert(
+            'Solde insuffisable.\nVotre solde est: ' + data.solde + ' DH'
+          );
           this.router.navigate(['/overview/transferts']);
-
-        }
-        else{
+        } else {
           this.transfert = this.addtransfert.value;
-    this.transfert.idAgent=1
-      this.transfert.idClient=this.idClient
+          this.transfert.idAgent = 1;
+          this.transfert.idClient = this.idClient;
 
-    this.transfertService
-      .save(this.transfert)
-      .subscribe((result) => {
-        this.codeTransfert=result.codeTransfert
-        this.a=result.montant
-        this.benef=result.nomBenef+" " +result.prenomBenef
-      this.updateSolde()
-      this.sendSms();
-
-
-  },
-  (error) => {
-    console.log(error)
-
-  })
+          this.transfertService.save(this.transfert).subscribe(
+            (result) => {
+              this.codeTransfert = result.codeTransfert;
+              this.a = result.montant;
+              this.benef = result.nomBenef + ' ' + result.prenomBenef;
+              this.updateSolde();
+              this.sendSms();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         }
-        
-  
-  },   (error) => {
-      console.log(error)
-  
-    });
-    
-    
+      },
+      (error) => {
+        console.log(error);
       }
-  
-updateSolde(){
-  this.solde=this.compte.solde-this.montant.value
+    );
+  }
 
-  this.compteService.update(this.compte.nomClient,this.solde).subscribe((result) =>
-   this.router.navigate(['/overview/transferts']));
-}
-sendSms(){
-  this.notif= new Notification()
+  updateSolde() {
+    this.solde = this.compte.solde - this.montant.value;
 
-      this.notif.message="Vous avez effectué un versement de montant : "+this.a+" à "+this.benef+".\n Votre code de transfert est :"+this.codeTransfert
-      this.notif.phoneNumber=this.transfert.numGsm
- 
-this.notificationService.send(this.notif).subscribe((result) => {
-  this.router.navigate(['/overview/transferts']);
+    this.compteService
+      .update(this.compte.nomClient, this.solde)
+      .subscribe((result) => this.router.navigate(['/overview/transferts']));
+  }
+  sendSms() {
+    this.notif = new Notification();
 
-},
-(error) => {
-  console.log(error)
+    this.notif.message =
+      'Vous avez effectué un versement de montant : ' +
+      this.a +
+      ' à ' +
+      this.benef +
+      '.\n Votre code de transfert est :' +
+      this.codeTransfert;
+    this.notif.phoneNumber = this.transfert.numGsm;
 
-})
-}
+    this.notificationService.send(this.notif).subscribe(
+      (result) => {
+        this.router.navigate(['/overview/transferts']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   gotoTransfertList() {
     this.router.navigate(['/overview/transferts']);
@@ -177,10 +175,16 @@ this.notificationService.send(this.notif).subscribe((result) => {
     this.addtransfert.reset();
   }
 
-  getErrorMessage(){
-    if (this.pi.hasError('required')||this.numGsm.hasError('required')||this.montant.hasError('required')||this.nom.hasError('required')||this.prenom.hasError('required')) 
-    return 'You must enter a value';
+  getErrorMessage() {
+    if (
+      this.pi.hasError('required') ||
+      this.numGsm.hasError('required') ||
+      this.montant.hasError('required') ||
+      this.nom.hasError('required') ||
+      this.prenom.hasError('required')
+    )
+      return 'You must enter a value';
   }
 
-//this.GsmBenef.hasError('required')||
+  //this.GsmBenef.hasError('required')||
 }

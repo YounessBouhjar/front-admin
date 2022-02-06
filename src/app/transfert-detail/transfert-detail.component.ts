@@ -7,6 +7,7 @@ import { TransfertService } from '../service/transfert.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeneficiaireService } from '../service/beneficiaire.service';
 import { CompteService } from '../service/compte.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-transfert-detail',
@@ -104,16 +105,33 @@ restituer(){
   if(this.Transfert.status==='débloqué à servir' ||this.Transfert.status==='à servir'){
     if(this.motiff.value==='')window.alert("Veuillez entrer un motif de restitution");
     else{
-      this.stat="restitué"
-      this.transfertService.update(this.Transfert.codeTransfert,this.motiff.value,this.stat).subscribe(
-        (data) => {
-        console.log(data)
-        this.update()
+      const message = `Voulez vous vraiment restituer le transfert ${this.Transfert.codeTransfert} à cause de ${this.motiff.value} ?`;
 
-      },
-      (error) => console.log(error)
-    );
+    const dialogData = new ConfirmDialogModel("Restitution confirmation", message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData,
+
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        
+        this.stat="restitué"
+        this.transfertService.update(this.Transfert.codeTransfert,this.motiff.value,this.stat).subscribe(
+          (data) => {
+          console.log(data)
+          this.update()
+  
+        },
+        (error) => console.log(error)
+      );
+      }
+    });
+
     }
+
   }
  else if(this.Transfert.status==='servi'){
   window.alert("Impossible de restituer le transfert car il est déjà payé");

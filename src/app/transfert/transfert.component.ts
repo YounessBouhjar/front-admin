@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Compte } from '../Model/compte';
 import { Transfert } from '../Model/transfert';
 import { CompteService } from '../service/compte.service';
@@ -89,17 +88,6 @@ export class TransfertComponent implements OnInit {
     this.solde();
   }
 
-
-//   onRowClicked(row) {
-//     console.log('Row clicked: ', row);
-//     console.log(row.codeTransfert)
-//     this.id2=row.codeTransfert;
-//     this.route.navigate(['/overview/transfert/detail/' + this.id2]);
-
-// }
-// goToAgents(id2: number) {
-//   this.route.navigate(['/overview/updateAgent/' + id2]);
-// }  
   HandleChange(){
     this.Transferts=this.TransfertCrit.value;
     console.log(this.Transferts)

@@ -6,6 +6,7 @@ import { ClientService } from '../service/client.service';
 import { TransfertService } from '../service/transfert.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeneficiaireService } from '../service/beneficiaire.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-deblocage-detail',
@@ -84,15 +85,43 @@ debloquer(){
 
   }
     else{
-      this.transfertService.update(this.Transfert.codeTransfert,"","débloqué à servir").subscribe(
-        (data) => {
-        console.log(data)
-        this.route.navigate(['/overview/transferts']);
+      const message = `Voulez vous vraiment débloquer le transfert ${this.Transfert.codeTransfert} ?`;
 
-      },
-      (error) => console.log(error)
-    );
+      const dialogData = new ConfirmDialogModel("Unlock confirmation", message);
+  
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        maxWidth: "400px",
+        data: dialogData,
+  
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          
+          this.transfertService.update(this.Transfert.codeTransfert,"","débloqué à servir").subscribe(
+            (data) => {
+            console.log(data)
+            this.route.navigate(['/overview/transferts']);
+    
+          },
+          (error) => console.log(error)
+        );
+        }
+      });
+  
     }
+
+
+
+
+
+
+
+
+
+
+
+
   }
  
 

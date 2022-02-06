@@ -1,0 +1,51 @@
+<form [formGroup]="addAdmin" (ngSubmit)="onSubmit()">
+    <div class="bottomBorder">
+      <div class="container">
+        <mat-grid-list cols="2" rowHeight="16:1">
+          <mat-grid-tile class="fullheight">
+            <div fxFlex fxLayoutAlign="start center">
+              <button
+                mat-button
+                class="blueButton"
+                type="submit"
+                value="Valider"
+                [disabled]="!addAdmin.valid"
+              >
+                Valider
+              </button>
+
+              <button mat-button class="blueButton" (click)="gotoAdminList()">
+                Annuler
+              </button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  
+    <div class="container content">
+      <mat-grid-list cols="2" rowHeight="6:1">
+
+
+  
+  
+        <mat-grid-tile>
+          <mat-form-field class="formField">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" />
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+  
+  
+        <mat-grid-tile>
+          <mat-form-field class="formField">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+            <mat-error *ngIf="password.invalid">{{getErrorMessages()}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </form>
+  

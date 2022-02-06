@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Transfert } from '../Model/transfert';
 import { TransfertService } from '../service/transfert.service';
 @Component({
@@ -17,13 +16,9 @@ export class BlocageComponent implements OnInit {
   Transferts: any;
   id: string;
   id2: number;
-
+  result: any;
   dataSource = new MatTableDataSource<Transfert>(this.Transferts);
 
-  
-
-
-  result: any;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

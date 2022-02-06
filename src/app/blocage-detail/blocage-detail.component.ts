@@ -6,6 +6,7 @@ import { ClientService } from '../service/client.service';
 import { TransfertService } from '../service/transfert.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BeneficiaireService } from '../service/beneficiaire.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-blocage-detail',
@@ -95,14 +96,37 @@ bloquer(){
   if(this.Transfert.status==='à servir'){
     if(this.motiff.value==='')window.alert("Veuillez entrer un motif de bloquage");
     else{
-      this.transfertService.update(this.Transfert.codeTransfert,this.motiff.value,"bloqué").subscribe(
-        (data) => {
-        console.log(data)
-        this.route.navigate(['/overview/transferts']);
 
-      },
-      (error) => console.log(error)
-    );
+
+      const message = `Voulez vous vraiment bloquer le transfert ${this.Transfert.codeTransfert} à cause du motif ${this.motiff.value} ?`;
+
+      const dialogData = new ConfirmDialogModel("Lock confirmation", message);
+  
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        maxWidth: "400px",
+        data: dialogData,
+  
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          
+          this.transfertService.update(this.Transfert.codeTransfert,this.motiff.value,"bloqué").subscribe(
+            (data) => {
+            console.log(data)
+            this.route.navigate(['/overview/transferts']);
+    
+          },
+          (error) => console.log(error)
+        );
+        }
+      });
+
+
+
+
+
+
     }
   }
  

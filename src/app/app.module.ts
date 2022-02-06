@@ -54,6 +54,10 @@ import { BlocageComponent } from './blocage/blocage.component';
 import { BlocageDetailComponent } from './blocage-detail/blocage-detail.component';
 import { DeblocageComponent } from './deblocage/deblocage.component';
 import { DeblocageDetailComponent } from './deblocage-detail/deblocage-detail.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
+import { UpdateAdminComponent } from './update-admin/update-admin.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +75,10 @@ import { DeblocageDetailComponent } from './deblocage-detail/deblocage-detail.co
     BlocageDetailComponent,
     DeblocageComponent,
     DeblocageDetailComponent,
+    ConfirmDialogComponent,
+    AdminComponent,
+    AddAdminComponent,
+    UpdateAdminComponent,
     
   ],
   imports: [
