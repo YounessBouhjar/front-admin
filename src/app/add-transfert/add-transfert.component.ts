@@ -18,6 +18,7 @@ import { TransfertService } from '../service/transfert.service';
 export class AddTransfertComponent implements OnInit {
   solde: any;
   compte: any;
+  idUsr:any
   transfert: Transfert;
   id: string;
   idClient: any;
@@ -82,7 +83,9 @@ export class AddTransfertComponent implements OnInit {
 
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idUsr=sessionStorage.getItem("idUsr")
+  }
   onchange() {
     this.clientService.findClientCin(this.pi.value).subscribe(
       (data) => {
@@ -118,7 +121,7 @@ export class AddTransfertComponent implements OnInit {
               this.onClose()
         } else {
           this.transfert = this.addtransfert.value;
-          this.transfert.idAgent = 1;
+          this.transfert.idAdmin = this.idUsr;
           this.transfert.idClient = this.idClient;
 
           this.transfertService.save(this.transfert).subscribe(

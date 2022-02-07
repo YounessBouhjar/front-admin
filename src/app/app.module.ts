@@ -39,7 +39,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { AgentComponent } from './agent/agent.component';
@@ -57,6 +57,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { AdminComponent } from './admin/admin.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { UpdateAdminComponent } from './update-admin/update-admin.component';
+import { BasicAuthHttpInterceptorService } from './service/basic-auth-http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,12 @@ import { UpdateAdminComponent } from './update-admin/update-admin.component';
 
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: BasicAuthHttpInterceptorService,
+    multi: true,
+  },
+  ],
   bootstrap: [AppComponent],
   entryComponents:[AddAdminComponent]
 })

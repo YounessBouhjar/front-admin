@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
           this.loginInvalid = false;
           this.router.navigate(['/overview/admins']);
           sessionStorage.setItem('password',btoa(this.password.value))
+          sessionStorage.setItem('idUsr',data.id.toString())
+
           console.log("data login : " +JSON.stringify(data));
 
         },

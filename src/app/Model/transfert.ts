@@ -13,4 +13,6 @@ export class Transfert {
     nombreJours:number;
     motif:string;
     motifTransfert:string;
+    idAdmin:number;
+
 }
