@@ -9,7 +9,7 @@ import { Notification } from '../Model/notification';
 export class NotificationService {
   private notifUrl: string;
   constructor(private http: HttpClient) {
-    this.notifUrl = 'http://localhost:8080/';
+    this.notifUrl = 'http://localhost:9191/admin/';
   }
   public send(notification: Notification) :Observable<any>{
     let email = sessionStorage.getItem('email');

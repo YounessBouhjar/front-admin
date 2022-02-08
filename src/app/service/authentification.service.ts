@@ -16,7 +16,7 @@ export class AuthentificationService {
 
     });
     return this.httpClient
-      .get<Admin>('http://localhost:9191/admin/username/'+email, {headers,})
+      .get<Admin>('https://edb-admin.herokuapp.com/admin/username/'+email, {headers,})
       .pipe( 
         map((userData) => {
           sessionStorage.setItem('email', email);

@@ -19,9 +19,6 @@ export class BasicAuthHttpInterceptorService implements HttpInterceptor {
       req = req.clone({
         setHeaders: {
           Authorization: sessionStorage.getItem('basicauth'),
-          'Access-Control-Allow-Origin': '*',
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-         "Access-Control-Allow-Methods":'GET, POST, PATCH, PUT, DELETE, OPTIONS'
 
         },
       });

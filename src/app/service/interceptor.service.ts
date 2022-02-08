@@ -15,8 +15,7 @@ export class InterceptorService {
       req = req.clone({
         setHeaders: {
           Authorization: sessionStorage.getItem('basicauth'),
-          'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+
         },
       });
     }

@@ -130,7 +130,7 @@ export class AddTransfertComponent implements OnInit {
               this.a = result.montant;
               this.benef = result.nomBenef + ' ' + result.prenomBenef;
               this.updateSolde();
-              this.sendSms();
+              
             },
             (error) => {
               console.log(error);
@@ -149,7 +149,7 @@ export class AddTransfertComponent implements OnInit {
 
     this.compteService
       .update(this.compte.nomClient, this.solde)
-      .subscribe((result) =>       this.onClose()
+      .subscribe((result) =>       this.sendSms()
       );
   }
   sendSms() {
@@ -171,8 +171,7 @@ export class AddTransfertComponent implements OnInit {
 },
       (error) => {
         console.log(error);
-        this.onClose    
-       window.location.reload()
+
       }
     );
   }
