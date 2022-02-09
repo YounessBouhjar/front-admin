@@ -11,10 +11,15 @@ export class AuthentificationService {
   constructor(private httpClient: HttpClient) { }
 
   authentificate(email, password) {
-    const headers = new HttpHeaders({
-      Authorization: 'Basic ' + btoa(email + ':' + password),
+    let headers = new HttpHeaders({
 
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      'Authorization': 'Basic ' + btoa(email + ':' + password),
     });
+
     return this.httpClient
       .get<Admin>('https://edb-admin.herokuapp.com/admin/username/'+email, {headers,})
       .pipe( 

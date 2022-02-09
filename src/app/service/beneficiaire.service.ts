@@ -10,7 +10,7 @@ export class BeneficiaireService {
 
   private benefUrl: string;
   constructor(private http: HttpClient) {
-    this.benefUrl = 'http://localhost:9191/admin/';
+    this.benefUrl = 'https://edb-admin.herokuapp.com/admin/';
   }
   public findBeneficiaire(id: number): Observable<any> {
     let email = sessionStorage.getItem('email');

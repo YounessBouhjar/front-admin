@@ -10,7 +10,7 @@ export class ClientService {
 
   private clientUrl: string;
   constructor(private http: HttpClient) {
-    this.clientUrl = 'http://localhost:9191/admin/';
+    this.clientUrl = 'https://edb-admin.herokuapp.com/admin/';
   }
   public findClient(id: number): Observable<any> {
     let email = sessionStorage.getItem('email');

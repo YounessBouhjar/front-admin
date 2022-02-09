@@ -9,7 +9,7 @@ import { Compte } from '../Model/compte';
 export class CompteService {
   private compteUrl: string;
   constructor(private http: HttpClient) {
-    this.compteUrl = 'http://localhost:9191/admin/';
+    this.compteUrl = 'https://edb-admin.herokuapp.com/admin/';
   }
 
   public addCompte(compte:Compte): Observable<any> {

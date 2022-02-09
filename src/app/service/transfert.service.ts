@@ -9,7 +9,7 @@ import { Transfert } from '../Model/transfert';
 export class TransfertService {
   private transfertUrl: string;
   constructor(private http: HttpClient) {
-    this.transfertUrl = 'http://localhost:9191/admin/';
+    this.transfertUrl = 'https://edb-admin.herokuapp.com/admin/';
   }
 
   public findAllTransferts(): Observable<any> {

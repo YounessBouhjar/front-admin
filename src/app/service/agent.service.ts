@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AgentService {
   private agentUrl: string;
   constructor(private http: HttpClient) {
-    this.agentUrl = 'http://localhost:9191/admin/';
+    this.agentUrl = 'https://edb-admin.herokuapp.com/admin/';
   }
   
   public findAllAgents(): Observable<any> {
