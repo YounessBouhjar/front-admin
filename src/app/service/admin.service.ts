@@ -10,7 +10,7 @@ export class AdminService {
 
   private adminUrl: string;
   constructor(private http: HttpClient) {
-    this.adminUrl = 'http://localhost:9191/admin/';
+    this.adminUrl = 'https://edb-admin.herokuapp.com/admin/';
   }
   
   public findAllAdmins(): Observable<any> {
